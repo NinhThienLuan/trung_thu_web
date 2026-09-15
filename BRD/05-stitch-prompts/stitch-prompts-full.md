@@ -29,10 +29,10 @@ Components: Image gallery with zoom preview, Product Title, SKU, Price, Fresh Sh
 ```
 
 ### 4. Route `/custom-box` - Tự Ghép Hộp Quà & In Tên
-*(Xem chi tiết Stitch Prompt tại [`stitch-prompts-core.md`](file:///d:/GitHub/Luan_ai_workflow/ba/05-stitch-prompts/stitch-prompts-core.md#1-stitch-prompt-t%E1%BB%B1-gh%C3%A9p-h%E1%BB%99p-qu%C3%A0--in-t%C3%AAn-custom-box))*
+*(Xem chi tiết Stitch Prompt tại [`stitch-prompts-core.md`](file:///d:/GitHub/trung_thu_web/BRD/05-stitch-prompts/stitch-prompts-core.md#1-stitch-prompt-t%E1%BB%B1-gh%C3%A9p-h%E1%BB%99p-qu%C3%A0--in-t%C3%AAn-custom-box))*
 
 ### 5. Route `/b2b-quotation` - Form Đăng Ký Báo Giá B2B
-*(Xem chi tiết Stitch Prompt tại [`stitch-prompts-core.md`](file:///d:/GitHub/Luan_ai_workflow/ba/05-stitch-prompts/stitch-prompts-core.md#3-stitch-prompt-form-%C4%91%C4%83ng-k%C3%BD-b%C3%A1o-gi%C3%A1-b2b-b2b-quotation))*
+*(Xem chi tiết Stitch Prompt tại [`stitch-prompts-core.md`](file:///d:/GitHub/trung_thu_web/BRD/05-stitch-prompts/stitch-prompts-core.md#3-stitch-prompt-form-%C4%91%C4%83ng-k%C3%BD-b%C3%A1o-gi%C3%A1-b2b-b2b-quotation))*
 
 ### 6. Route `/compliance` - Hồ Sơ Năng Lực & ATTP
 ```markdown
@@ -49,7 +49,7 @@ Components: List of Cart Items (Custom Box item showing selected box shell, loos
 ```
 
 ### 8. Route `/checkout` - Thanh Toán, Đặt Cọc & Đặt Lịch Giao
-*(Xem chi tiết Stitch Prompt tại [`stitch-prompts-core.md`](file:///d:/GitHub/Luan_ai_workflow/ba/05-stitch-prompts/stitch-prompts-core.md#2-stitch-prompt-thanh-to%C3%A1n-%C4%91%E1%BA%B7t-c%E1%BB%8Dc--%C4%91%E1%BA%B7t-l%E1%BB%8Bch-giao-checkout))*
+*(Xem chi tiết Stitch Prompt tại [`stitch-prompts-core.md`](file:///d:/GitHub/trung_thu_web/BRD/05-stitch-prompts/stitch-prompts-core.md#2-stitch-prompt-thanh-to%C3%A1n-%C4%91%E1%BA%B7t-c%E1%BB%8Dc--%C4%91%E1%BA%B7t-l%E1%BB%8Bch-giao-checkout))*
 
 ### 9. Route `/order-tracking/[id]` - Tra Cứu Đơn Hàng
 ```markdown
@@ -70,7 +70,7 @@ Components: Metric Cards (Total Season Revenue, Total Orders, Pending Deposit Or
 ```
 
 ### 11. Route `/admin/calendar` - Lịch Sản Xuất Song Lịch Âm/Dương
-*(Xem chi tiết Stitch Prompt tại [`stitch-prompts-core.md`](file:///d:/GitHub/Luan_ai_workflow/ba/05-stitch-prompts/stitch-prompts-core.md#4-stitch-prompt-admin-l%E1%BB%8Bch-s%E1%BA%A3n-xu%E1%BA%A5t-song-l%E1%BB%8Bch-%C3%A2md%C6%B0%C6%A1ng-admincalendar))*
+*(Xem chi tiết Stitch Prompt tại [`stitch-prompts-core.md`](file:///d:/GitHub/trung_thu_web/BRD/05-stitch-prompts/stitch-prompts-core.md#4-stitch-prompt-admin-l%E1%BB%8Bch-s%E1%BA%A3n-xu%E1%BA%A5t-song-l%E1%BB%8Bch-%C3%A2md%C6%B0%C6%A1ng-admincalendar))*
 
 ### 12. Route `/admin/orders` - Quản Lý Đơn Hàng & Đặt Cọc
 ```markdown

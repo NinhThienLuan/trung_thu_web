@@ -25,22 +25,29 @@ trung_thu_web/
  ├── README.md                           ──► [Hồ sơ Onboarding cho người mới]
  ├── FEATURE_PRIORITY.md                 ──► [Danh sách Ưu tiên Phát triển Tính năng P0/P1/P2]
  ├── ideas.md                            ──► [Ý tưởng sản phẩm & Mô hình kinh doanh Sàn]
- ├── 01-overview/
- │    └── glossary.md                    ──► [Từ điển thuật ngữ nghiệp vụ]
- ├── 02-business-rules/                  ──► [Các bộ Quy tắc Nghiệp vụ Cốt lõi]
- │    ├── BR-01-b2c-ordering.md          ──► (Đơn lẻ B2C & Ghép Hộp Customizer)
- │    ├── BR-02-b2b-quote-request.md     ──► (Yêu cầu Báo giá Sỉ B2B RFQ)
- │    ├── BR-03-dynamic-pricing.md       ──► (Chính sách Giá biến động & Phụ thu)
- │    ├── BR-04-admin-production-calendar.md ──► (Lịch Âm Dương & Capacity Cap)
- │    └── BR-05-operational-risks-and-policy.md ──► (Hoàn hàng, Escrow Hold & HSD)
- ├── 03-product-spec/
- │    ├── sitemap.md                     ──► [Sơ đồ trang & Ma trận Phân quyền Route]
- │    ├── screen-specs-core.md           ──► [Đặc tả 4 Màn hình Cốt lõi MVP]
- │    └── screen-specs-full.md           ──► [Đặc tả toàn bộ màn hình]
- ├── 04-agent-and-dev-guidelines/
- │    ├── system-data-dictionary.md     ──► [Từ điển dữ liệu & Schema CSDL]
- │    └── edge-cases-and-validation.md   ──► [Ma trận xử lý lỗi biên & ngoại lệ]
- ├── 05-stitch-prompts/                 ──► [Prompt thiết kế UI/UX]
+ ├── BRD/                                ──► [Thư mục Tài liệu Đặc tả Nghiệp vụ Business Requirements Document]
+ │    ├── 01-overview/
+ │    │    └── glossary.md               ──► [Từ điển thuật ngữ nghiệp vụ]
+ │    ├── 02-business-rules/             ──► [Các bộ Quy tắc Nghiệp vụ Cốt lõi]
+ │    │    ├── BR-01-b2c-ordering.md     ──► (Đơn lẻ B2C & Ghép Hộp Customizer)
+ │    │    ├── BR-02-b2b-quote-request.md ──► (Yêu cầu Báo giá Sỉ B2B RFQ)
+ │    │    ├── BR-03-dynamic-pricing.md  ──► (Chính sách Giá biến động & Phụ thu)
+ │    │    ├── BR-04-admin-production-calendar.md ──► (Lịch Âm Dương & Capacity Cap)
+ │    │    └── BR-05-operational-risks-and-policy.md ──► (Hoàn hàng, Escrow Hold & HSD)
+ │    ├── 03-product-spec/               ──► [Đặc tả Sản phẩm & Màn hình]
+ │    │    ├── sitemap.md                ──► [Sơ đồ trang & Ma trận Phân quyền Route]
+ │    │    ├── screen-specs.md           ──► [Tổng quan đặc tả màn hình]
+ │    │    ├── screen-specs-core.md      ──► [Đặc tả 4 Màn hình Cốt lõi MVP]
+ │    │    └── screen-specs-full.md      ──► [Đặc tả toàn bộ màn hình]
+ │    ├── 04-agent-and-dev-guidelines/   ──► [Hướng dẫn Lập trình & Schema CSDL]
+ │    │    ├── system-data-dictionary.md ──► [Từ điển dữ liệu & Schema CSDL]
+ │    │    └── edge-cases-and-validation.md ──► [Ma trận xử lý lỗi biên & ngoại lệ]
+ │    └── 05-stitch-prompts/            ──► [Prompt thiết kế UI/UX]
+ │         ├── design-style-guide.md     ──► [Hướng dẫn Phong cách Thiết kế]
+ │         ├── project-tailored-style.md ──► [Phong cách thiết kế Độc bản cho Dự án]
+ │         ├── stitch-prompts-core.md    ──► [Prompt Stitch Cốt lõi]
+ │         ├── stitch-prompts-full.md    ──► [Prompt Stitch toàn bộ 14 màn hình]
+ │         └── stitch-prompts-combined-styles.md ──► [Prompt Stitch tổng hợp]
  └── trungthuweb/                        ──► [Thư mục Mã Nguồn Thực Tế]
       ├── BE/                            ──► (Backend Codebase: Node.js Express REST API)
       └── FE/                            ──► (Frontend Codebase: React Vite + Tailwind CSS)
@@ -60,6 +67,6 @@ trung_thu_web/
 ## 🚀 4. Quy Trình Bắt Đầu Cho Lập Trình Viên Mới
 
 1. Đọc [README.md](file:///d:/GitHub/trung_thu_web/README.md) và [FEATURE_PRIORITY.md](file:///d:/GitHub/trung_thu_web/FEATURE_PRIORITY.md) để nắm rõ bức tranh tổng thể và thứ tự ưu tiên làm tính năng.
-2. Đọc [02-business-rules/](file:///d:/GitHub/trung_thu_web/02-business-rules) để hiểu quy tắc nghiệp vụ trước khi viết logic.
-3. Đọc [system-data-dictionary.md](file:///d:/GitHub/trung_thu_web/04-agent-and-dev-guidelines/system-data-dictionary.md) trước khi tạo bảng/thêm trường trong CSDL.
+2. Đọc [BRD/02-business-rules/](file:///d:/GitHub/trung_thu_web/BRD/02-business-rules) để hiểu quy tắc nghiệp vụ trước khi viết logic.
+3. Đọc [BRD/04-agent-and-dev-guidelines/system-data-dictionary.md](file:///d:/GitHub/trung_thu_web/BRD/04-agent-and-dev-guidelines/system-data-dictionary.md) trước khi tạo bảng/thêm trường trong CSDL.
 4. Bắt đầu phát triển từ các tính năng thuộc nhóm **P0 (MVP Core)** trước khi làm các khối P1, P2.

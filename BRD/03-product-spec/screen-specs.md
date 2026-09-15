@@ -5,7 +5,7 @@ Thư mục này chứa tài liệu mô tả chi tiết giao diện màn hình, l
 ---
 
 ## 📁 1. Tài Liệu Màn Hình Cốt Lõi (Core Screens Specification)
-- **Tập tin**: [`ba/03-product-spec/screen-specs-core.md`](file:///d:/GitHub/Luan_ai_workflow/ba/03-product-spec/screen-specs-core.md)
+- **Tập tin**: [`BRD/03-product-spec/screen-specs-core.md`](file:///d:/GitHub/trung_thu_web/BRD/03-product-spec/screen-specs-core.md)
 - **Số lượng**: 4 Màn hình cốt lõi phức tạp nhất.
 - **Đối tượng sử dụng**: Nhóm phát triển MVP ưu tiên, lập trình viên FE dựng trước các luồng quan trọng nhất trong Sprint 1 & 2.
 - **Danh sách màn hình**:
@@ -17,7 +17,7 @@ Thư mục này chứa tài liệu mô tả chi tiết giao diện màn hình, l
 ---
 
 ## 📁 2. Tài Liệu Đầy Đủ Tất Cả Màn Hình (Full 14 Screens Specification)
-- **Tập tin**: [`ba/03-product-spec/screen-specs-full.md`](file:///d:/GitHub/Luan_ai_workflow/ba/03-product-spec/screen-specs-full.md)
+- **Tập tin**: [`BRD/03-product-spec/screen-specs-full.md`](file:///d:/GitHub/trung_thu_web/BRD/03-product-spec/screen-specs-full.md)
 - **Số lượng**: 14 Màn hình (phủ 100% tất cả các URL Routes trong `sitemap.md`).
 - **Đối tượng sử dụng**: Đội ngũ phát triển hoàn thiện toàn bộ sản phẩm, đảm bảo không bỏ sót bất kỳ trang nào.
 - **Danh sách màn hình**:
