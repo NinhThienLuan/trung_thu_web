@@ -1,6 +1,6 @@
 # 🌕 Nền Tảng Bán Bánh Trung Thu Trực Tuyến (`trung_thu_web`)
 
-Chào mừng bạn đến với dự án **Nền Tảng Bán Bánh Trung Thu Trực Tuyến**! Tài liệu này hướng dẫn tổng quan cho thành viên mới (Lập trình viên, Designer, AI Coding Agents) khi bắt đầu tiếp cận dự án.
+Chào mừng bạn đến với dự án **Nền Tảng Bán Bánh Trung Thu Trực Tuyến**! Tài liệu này hướng dẫn tổng quan cho thành viên (Lập trình viên, Designer, AI Coding Agents, ...) khi bắt đầu tiếp cận dự án.
 
 ---
 
