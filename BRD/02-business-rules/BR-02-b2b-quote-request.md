@@ -1,66 +1,79 @@
-# 📜 Business Rule: BR-02 - Yêu Cầu Báo Giá Đặt Hàng Số Lượng Lớn (B2B Bulk Quote Request)
+# 📜 Business Rule: BR-02 - Yêu Cầu Báo Giá Đặt Hàng Số Lượng Lớn Đa Provider (Multi-Provider B2B Bulk RFQ & Quotation)
 
 ## 1. Goal (Mục tiêu)
-Cho phép các doanh nghiệp, tổ chức có nhu cầu mua bánh Trung Thu số lượng lớn gửi thông tin Yêu cầu báo giá (RFQ), **đăng ký lịch chia đợt giao bánh tươi** (để đảm bảo hạn sử dụng 7-15 ngày). Hệ thống ghi nhận yêu cầu và chuyển dữ liệu về cho bộ phận Sales để tiến hành tư vấn, báo giá và đàm phán thủ công.
+Cho phép các doanh nghiệp, tổ chức có nhu cầu mua bánh Trung Thu số lượng lớn ($\ge 20$ hộp) gửi Yêu cầu báo giá (RFQ), **đăng ký danh sách các đợt giao bánh tươi nhỏ**, đính kèm logo in ấn và ngân sách dự kiến. Hệ thống tự động phân phối RFQ tới các Provider/Seller có đủ năng lực trên sàn để các Provider gửi **Báo giá cạnh tranh (`provider_quotations`)**. Khách hàng Doanh nghiệp so sánh báo giá và lựa chọn Provider phù hợp nhất để chốt hợp đồng.
 
 ---
 
 ## 2. Core Rules (Quy tắc nghiệp vụ cốt lõi)
 
 ### 2.1. Điều Kiện Kích Hoạt & Khung Thời Gian Mùa Vụ (Trigger Conditions & Seasonality)
-- **Thời gian hoạt động**: Form RFQ chỉ mở tiếp nhận trong mùa vụ Trung Thu (từ đầu tháng 7 Âm lịch đến 10/8 Âm lịch). Ngoài khung thời gian này, hiển thị thông báo *"Hệ thống đăng ký báo giá mùa Tết Trung Thu sẽ mở vào tháng 7 Âm lịch"*.
+- **Thời gian hoạt động**: Form RFQ tiếp nhận trong mùa vụ Trung Thu (từ tháng 7 Âm lịch đến 10/8 Âm lịch).
 - **Điều kiện số lượng**: Đơn hàng dự kiến có số lượng $\ge 20$ hộp (hoặc tổng giá trị dự kiến $\ge 10.000.000$ VNĐ).
 
-### 2.2. Quy Định Dữ Liệu Form Yêu Cầu Báo Giá (RFQ Form Fields Validation)
+### 2.2. Quy Định Dữ Liệu Form RFQ Doanh Nghiệp (`b2b_rfqs`)
 - Các trường bắt buộc (`Required`):
   - **Tên Doanh Nghiệp / Tổ Chức**: Chuỗi văn bản ($\ge 3$ ký tự).
-  - **Họ và Tên Người Liên Hệ**: Chuỗi văn bản.
-  - **Số Điện Thoại**: Định dạng SĐT Việt Nam hợp lệ (10 chữ số).
-  - **Email**: Định dạng email hợp lệ.
+  - **Mã Số Thuế**: Mã định danh thuế doanh nghiệp.
+  - **Họ và Tên Người Liên Hệ / Chức Vụ**: Chuỗi văn bản.
+  - **Số Điện Thoại & Email**: Định dạng liên hệ hợp lệ.
   - **Số Lượng Dự Kiến**: Số nguyên $\ge 20$.
-  - **Yêu cầu Lịch Giao Bánh Tươi**:
-    - [ ] Giao 1 đợt duy nhất (chọn ngày cụ thể).
-    - [ ] Chia thành nhiều đợt giao (đặc thù do bánh tươi HSD ngắn 7-15 ngày, doanh nghiệp chọn các mốc ngày giao khác nhau).
+  - **Đăng Ký Các Đợt Giao Bánh Tươi (`order_batches`)**:
+    - Nhập danh sách các Mốc ngày giao Dương lịch mong muốn và số lượng từng đợt (đặc thù do bánh tươi HSD 7-15 ngày, doanh nghiệp chia giao nhiều chi nhánh/đợt biếu tặng).
 - Các trường tự chọn (`Optional`):
-  - **Yêu cầu in Logo / Tên công ty lên vỏ hộp**: Checkbox + đính kèm file Logo (định dạng PNG, SVG, AI, PDF).
-  - **Mức Ngân Sách Dự Kiến / Hộp**: Dropdown phân khúc (Ví dụ: 300k - 500k, 500k - 1 triệu, > 1 triệu).
-  - **Ghi chú thêm**: Textarea nhập yêu cầu xuất hóa đơn VAT, danh sách địa chỉ giao hàng nhiều chi nhánh...
+  - **File Logo Doanh Nghiệp**: Đính kèm file đè logo (PNG, SVG, AI, PDF $< 10\text{MB}$).
+  - **Mức Ngân Sách Dự Kiến**: Ngân sách tổng chi trả cho đợt quà tặng.
 
-### 2.3. Quy Trình Chuyển Tiếp & Xử Lý Dữ Liệu Sales (Lead Routing & Sales Workflow)
-- **Tạo Mã RFQ**: Ngay khi người dùng nhấn "Gửi Yêu Cầu", hệ thống tự động sinh mã định danh duy nhất theo định dạng `RFQ-YYYYMMDD-XXXX` (VD: `RFQ-20260913-0042`).
-- **Gửi Thông Báo Tức Thời (Real-time Notification)**:
-  - Gửi email xác nhận kèm mã RFQ cho Khách hàng doanh nghiệp.
-  - Gửi thông báo email + Webhook đẩy dữ liệu Lead về **Dashboard Quản Trị Sales / CRM**.
-- **Quy Trình Sales Tư Vấn Thủ Công (Manual Consultation)**:
-  - Trạng thái ban đầu của RFQ: `NEW` (Mới tiếp nhận).
-  - Nhân viên Sales được phân công nhận Lead, liên hệ khách hàng qua Điện thoại/Zalo trong vòng **2 giờ làm việc**.
-  - Sales chủ động tư vấn phương án **chia đợt giao bánh tươi ra lò**, thiết kế bản mẫu (Mockup) hộp in logo, lập bảng báo giá PDF có chiết khấu và gửi riêng cho khách hàng.
-  - Trạng thái cập nhật bởi Sales: `CONTACTED` ➔ `QUOTATION_SENT` ➔ `WON` (Chốt đơn) / `LOST` (Thất bại).
+### 2.3. Quy Trình Phân Phối RFQ & Đấu Thầu Báo Giá Đa Provider (Multi-Provider Bidding Workflow)
+- **Tạo Mã RFQ**: Sinh mã định danh `RFQ-YYYYMMDD-XXXX`.
+- **Phân Phối RFQ Đến Các Provider Đủ Năng Lực**:
+  - RFQ được chuyển sang trạng thái `DISTRIBUTED`.
+  - Hệ thống gửi thông báo Dashboard + Email đến các Seller/Kiot thỏa mãn điều kiện (đã duyệt `is_compliance_approved` và có gói Kiot hợp lệ).
+- **Nộp Báo Giá Cạnh Tranh (`provider_quotations`)**:
+  - Mỗi Provider có thể lập 1 bản Báo giá chi tiết (`ProviderQuotation`) bao gồm:
+    - Bảng kê chi tiết đơn giá từng Biến thể bánh lẻ/Vỏ hộp (`variant_id`).
+    - Tỷ lệ chiết khấu thương mại (`discount_percentage`).
+    - Hạn chót hiệu lực báo giá (`valid_until`).
+    - Đề xuất mẫu thử (Sample box), miễn phí in logo, hoặc hỗ trợ vận chuyển.
+  - Trạng thái báo giá: `SUBMITTED`.
+- **Lựa Chọn Báo Giá & Tự Động Sinh Đơn Hàng**:
+  - Khách Doanh nghiệp đăng nhập Portal B2B, so sánh các bản Báo giá từ nhiều Provider.
+  - Khách bấm **"Chấp Nhận Báo Giá"** (`ACCEPTED`):
+    - Trạng thái RFQ chuyển thành `WON`.
+    - Hệ thống tự động khởi tạo Đơn hàng tổng (`Order`) và các Đợt giao nhỏ (`OrderBatch`) tương ứng với báo giá trúng thầu.
+    - Chuyển sang bước Đặt cọc $50\%$ theo điều khoản hợp đồng.
 
 ---
 
 ## 3. Data Flow (Luồng dữ liệu)
 
 ```
-[Đại diện Doanh nghiệp (B2B)]
+[Khách Doanh Nghiệp B2B]
     │
-    ▼ Điền Form RFQ (Số lượng, Logo, Ngân sách, Đăng ký Chia Đợt Giao Bánh Tươi)
-[Hệ Thống Web Portal]
+    ▼ Gửi Yêu Cầu RFQ (Số lượng, Logo, Ngân sách, Đăng ký Đợt Giao)
+[Hệ Thống Web Portal (b2b_rfqs)]
     │
-    ├─► Kiểm tra Khung thời gian mùa vụ (Tháng 7 Âm lịch -> 10/8 Âm lịch)
-    ├─► Validates Thông tin Form
     ├─► Sinh Mã RFQ (RFQ-YYYYMMDD-XXXX)
+    ├─► Trạng thái: DISTRIBUTED
     │
-    ├───► [Email Server] ──► Gửi Email Xác Nhận cho Khách B2B
+    ▼ Phân phối tới Dashboard các Seller/Kiot
+[Các Provider / Seller Trên Sàn]
     │
-    └───► [Database & CRM Sales] 
-             │
-             ▼ Trạng thái: NEW
-      [Bộ Phận Sales] ──► Liên hệ tư vấn thủ công (Lịch bánh tươi & Báo giá PDF)
+    ├─► Xem chi tiết RFQ & Lịch đợt giao
+    └─► Nộp Báo Giá Chi Tiết (provider_quotations) với Đơn giá & Chiết khấu
+    │
+    ▼
+[Portal Khách B2B So Sánh Báo Giá]
+    │
+    ├─► Bấm "Chấp Nhận Báo Giá" (ACCEPTED) Provider phù hợp nhất
+    │
+    ▼
+[Khởi Tạo Đơn Hàng Tổng & Các Order Batches]
+    └─► Thanh toán cọc 50% & Lập lịch sản xuất nướng bánh tươi cho Provider trúng thầu
 ```
 
 ---
 
 ## 4. Non-goals (Phạm vi không thực hiện trong BR này)
-- Hệ thống **KHÔNG tự động tính toán giá chiết khấu** để xuất hợp đồng trực tuyến tự động (nhằm đảm bảo tính linh hoạt đàm phán cho bộ phận Sales).
-- Không yêu cầu khách B2B thanh toán tiền cọc ngay trên website khi gửi form RFQ.
+- Không bắt buộc tất cả Provider phải gửi báo giá (Provider có quyền từ chối nếu hết Capacity nướng).
+- Không công khai báo giá của Provider này cho Provider khác xem (Đấu thầu kín).
